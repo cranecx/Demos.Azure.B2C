@@ -1,0 +1,6 @@
+@Demos.Azure.B2C.WebAPI_HostAddress = http://localhost:5223
+
+GET {{Demos.Azure.B2C.WebAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
