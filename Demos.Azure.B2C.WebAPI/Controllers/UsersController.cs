@@ -1,11 +1,15 @@
 ﻿using Azure.Identity;
 using Demos.Azure.B2C.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Graph;
+using Microsoft.Identity.Web.Resource;
+using System.Security.Claims;
 
 namespace Demos.Azure.B2C.WebAPI.Controllers
 {
     [ApiController]
+    [Authorize]
     [Route("api/users")]
     public class UsersController : ControllerBase
     {
@@ -32,12 +36,19 @@ namespace Demos.Azure.B2C.WebAPI.Controllers
         }
 
         [HttpGet]
-        [Route("{userId}")]
-        public async Task<IActionResult> GetUserDetails(string userId)
+        [Route("me")]
+        [RequiredScope("CurrentUser.Read")]
+        public async Task<IActionResult> GetCurrentUserDetails()
         {
             try
             {
-                var user = await GraphServiceClient.Users[userId].GetAsync((requestConfiguration) =>
+                var userId = User.FindFirst(ClaimTypes.NameIdentifier);
+
+                if (string.IsNullOrEmpty(userId?.Value))
+                {
+                    return Unauthorized();
+                }
+                var user = await GraphServiceClient.Users[userId?.Value].GetAsync((requestConfiguration) =>
                 {
                     requestConfiguration.QueryParameters.Select = ["displayName", "givenName", "surname", "identities", "createdDateTime", "accountEnabled", "userPrincipalName"];
                 });

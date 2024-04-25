@@ -62,7 +62,9 @@ public partial class MainForm : Form
 
             PrintToLog("Sign-in successful.");
 
-            await PrintTokenDetails(authResult.AccessToken ?? authResult.IdToken);
+            var token = authResult.AccessToken ?? authResult.IdToken;
+
+            await PrintTokenDetails(token);
 
             // Obtener la configuración general
             var generalSettings = await RoamingService.Get<GeneralSettings>("GeneralSettings");
@@ -70,8 +72,8 @@ public partial class MainForm : Form
             if (generalSettings != null && generalSettings.EnrichUserProfile && !string.IsNullOrWhiteSpace(generalSettings.UserProfileEnrichementEndpoint))
             {
                 // Llamar al API para obtener los detalles del usuario
-                var apiClient = new B2CAPIClient(generalSettings.UserProfileEnrichementEndpoint);
-                var user = await apiClient.GetUserDetailsAsync(authResult.UniqueId);
+                var apiClient = new B2CAPIClient(generalSettings.UserProfileEnrichementEndpoint, token);
+                var user = await apiClient.GetUserDetailsAsync();
 
                 if (user != null)
                 {

@@ -1,4 +1,5 @@
 ﻿using Demos.Azure.B2C.Models;
+using System.Net.Http.Headers;
 using System.Text.Json;
 
 namespace Demos.Azure.B2C.WebAPI.Client
@@ -7,18 +8,22 @@ namespace Demos.Azure.B2C.WebAPI.Client
     {
         private readonly HttpClient _httpClient;
         private readonly string _apiBaseUrl;
+        private readonly string _accessToken;
 
-        public B2CAPIClient(string apiBaseUrl)
+        public B2CAPIClient(string apiBaseUrl, string accessToken)
         {
             _apiBaseUrl = apiBaseUrl;
             _httpClient = new HttpClient();
+            _accessToken = accessToken;
         }
 
-        public async Task<User?> GetUserDetailsAsync(string userId)
+        public async Task<User?> GetUserDetailsAsync()
         {
             try
             {
-                var response = await _httpClient.GetAsync($"{_apiBaseUrl}/api/users/{userId}");
+                var request = new HttpRequestMessage(HttpMethod.Get, $"{_apiBaseUrl}/api/users/me");
+                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _accessToken);
+                var response = await _httpClient.SendAsync(request);
 
                 if (response.IsSuccessStatusCode)
                 {
