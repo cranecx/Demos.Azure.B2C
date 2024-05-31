@@ -4,4 +4,5 @@ public class GeneralSettings
 {
     public bool EnrichUserProfile { get; set; }
     public string? UserProfileEnrichementEndpoint { get; set; }
+    public string? UserProfileEnrichementScope { get; set; }
 }

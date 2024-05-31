@@ -35,16 +35,19 @@ partial class MainForm
         settingsToolStripMenuItem = new ToolStripMenuItem();
         generalSettngsToolStripMenuItem = new ToolStripMenuItem();
         authenticationSettingsToolStripMenuItem = new ToolStripMenuItem();
+        resourceListComboBox = new ComboBox();
+        resourceListLabel = new Label();
+        acquireTokenButton = new Button();
         mainMenuStrip.SuspendLayout();
         SuspendLayout();
         // 
         // logTextBox
         // 
-        logTextBox.Location = new Point(12, 57);
+        logTextBox.Location = new Point(12, 114);
         logTextBox.Multiline = true;
         logTextBox.Name = "logTextBox";
         logTextBox.ReadOnly = true;
-        logTextBox.Size = new Size(1076, 599);
+        logTextBox.Size = new Size(1076, 542);
         logTextBox.TabIndex = 0;
         // 
         // signInButton
@@ -97,11 +100,42 @@ partial class MainForm
         authenticationSettingsToolStripMenuItem.Text = "Authentication Settings";
         authenticationSettingsToolStripMenuItem.Click += AuthenticationSettingsToolStripMenuItemClick;
         // 
+        // resourceListComboBox
+        // 
+        resourceListComboBox.FormattingEnabled = true;
+        resourceListComboBox.Location = new Point(12, 85);
+        resourceListComboBox.Name = "resourceListComboBox";
+        resourceListComboBox.Size = new Size(156, 23);
+        resourceListComboBox.TabIndex = 4;
+        resourceListComboBox.SelectedIndexChanged += ResourceListComboBoxSelectedIndexChanged;
+        // 
+        // resourceListLabel
+        // 
+        resourceListLabel.AutoSize = true;
+        resourceListLabel.Location = new Point(12, 67);
+        resourceListLabel.Name = "resourceListLabel";
+        resourceListLabel.Size = new Size(55, 15);
+        resourceListLabel.TabIndex = 5;
+        resourceListLabel.Text = "Resource";
+        // 
+        // acquireTokenButton
+        // 
+        acquireTokenButton.Location = new Point(174, 85);
+        acquireTokenButton.Name = "acquireTokenButton";
+        acquireTokenButton.Size = new Size(107, 23);
+        acquireTokenButton.TabIndex = 6;
+        acquireTokenButton.Text = "Acquire Token";
+        acquireTokenButton.UseVisualStyleBackColor = true;
+        acquireTokenButton.Click += AcquireTokenButtonClick;
+        // 
         // MainForm
         // 
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
         ClientSize = new Size(1100, 667);
+        Controls.Add(acquireTokenButton);
+        Controls.Add(resourceListLabel);
+        Controls.Add(resourceListComboBox);
         Controls.Add(clearLogButton);
         Controls.Add(signInButton);
         Controls.Add(logTextBox);
@@ -110,6 +144,7 @@ partial class MainForm
         MaximizeBox = false;
         Name = "MainForm";
         Text = "Demo Azure AD B2C - Windows Forms";
+        Load += MainFormLoad;
         mainMenuStrip.ResumeLayout(false);
         mainMenuStrip.PerformLayout();
         ResumeLayout(false);
@@ -125,4 +160,7 @@ partial class MainForm
     private ToolStripMenuItem settingsToolStripMenuItem;
     private ToolStripMenuItem authenticationSettingsToolStripMenuItem;
     private ToolStripMenuItem generalSettngsToolStripMenuItem;
+    private ComboBox resourceListComboBox;
+    private Label resourceListLabel;
+    private Button acquireTokenButton;
 }

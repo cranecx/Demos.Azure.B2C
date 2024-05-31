@@ -6,6 +6,7 @@ namespace Demos.Azure.B2C.WinForms;
 
 public partial class AuthenticationSettingsForm : Form
 {
+    public event EventHandler<AuthenticationSettings>? AuthenticationSettingsChanged;
     public AuthenticationSettingsForm()
     {
         InitializeComponent();
@@ -24,6 +25,7 @@ public partial class AuthenticationSettingsForm : Form
 
         await RoamingService.Set("AuthenticationSettings", settings);
         MessageBox.Show("Authentication settings saved successfully.", "Settings Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        AuthenticationSettingsChanged?.Invoke(this, settings);
         Close();
     }
 

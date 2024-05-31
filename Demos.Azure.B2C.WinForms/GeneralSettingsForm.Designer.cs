@@ -30,13 +30,15 @@ partial class GeneralSettingsForm
     {
         saveButton = new Button();
         enrichUserProfileCheckBox = new CheckBox();
-        userProfileEnrichmentLabel = new Label();
-        userProfileEnrichmentTextBox = new TextBox();
+        userProfileEnrichmentEndpointLabel = new Label();
+        userProfileEnrichmentEndpointTextBox = new TextBox();
+        userProfileEnrichmentScopeTextBox = new TextBox();
+        userProfileEnrichmentScopeLabel = new Label();
         SuspendLayout();
         // 
         // saveButton
         // 
-        saveButton.Location = new Point(202, 146);
+        saveButton.Location = new Point(202, 194);
         saveButton.Name = "saveButton";
         saveButton.Size = new Size(75, 23);
         saveButton.TabIndex = 0;
@@ -55,29 +57,47 @@ partial class GeneralSettingsForm
         enrichUserProfileCheckBox.UseVisualStyleBackColor = true;
         enrichUserProfileCheckBox.CheckedChanged += EnrichUserProfileCheckBoxCheckedChanged;
         // 
-        // userProfileEnrichmentLabel
+        // userProfileEnrichmentEndpointLabel
         // 
-        userProfileEnrichmentLabel.AutoSize = true;
-        userProfileEnrichmentLabel.Location = new Point(12, 46);
-        userProfileEnrichmentLabel.Name = "userProfileEnrichmentLabel";
-        userProfileEnrichmentLabel.Size = new Size(182, 15);
-        userProfileEnrichmentLabel.TabIndex = 2;
-        userProfileEnrichmentLabel.Text = "User profile enrichment endpoint";
+        userProfileEnrichmentEndpointLabel.AutoSize = true;
+        userProfileEnrichmentEndpointLabel.Location = new Point(12, 86);
+        userProfileEnrichmentEndpointLabel.Name = "userProfileEnrichmentEndpointLabel";
+        userProfileEnrichmentEndpointLabel.Size = new Size(182, 15);
+        userProfileEnrichmentEndpointLabel.TabIndex = 2;
+        userProfileEnrichmentEndpointLabel.Text = "User profile enrichment endpoint";
         // 
-        // userProfileEnrichmentTextBox
+        // userProfileEnrichmentEndpointTextBox
         // 
-        userProfileEnrichmentTextBox.Location = new Point(12, 64);
-        userProfileEnrichmentTextBox.Name = "userProfileEnrichmentTextBox";
-        userProfileEnrichmentTextBox.Size = new Size(265, 23);
-        userProfileEnrichmentTextBox.TabIndex = 3;
+        userProfileEnrichmentEndpointTextBox.Location = new Point(12, 104);
+        userProfileEnrichmentEndpointTextBox.Name = "userProfileEnrichmentEndpointTextBox";
+        userProfileEnrichmentEndpointTextBox.Size = new Size(265, 23);
+        userProfileEnrichmentEndpointTextBox.TabIndex = 3;
+        // 
+        // userProfileEnrichmentScopeTextBox
+        // 
+        userProfileEnrichmentScopeTextBox.Location = new Point(12, 60);
+        userProfileEnrichmentScopeTextBox.Name = "userProfileEnrichmentScopeTextBox";
+        userProfileEnrichmentScopeTextBox.Size = new Size(265, 23);
+        userProfileEnrichmentScopeTextBox.TabIndex = 5;
+        // 
+        // userProfileEnrichmentScopeLabel
+        // 
+        userProfileEnrichmentScopeLabel.AutoSize = true;
+        userProfileEnrichmentScopeLabel.Location = new Point(12, 42);
+        userProfileEnrichmentScopeLabel.Name = "userProfileEnrichmentScopeLabel";
+        userProfileEnrichmentScopeLabel.Size = new Size(165, 15);
+        userProfileEnrichmentScopeLabel.TabIndex = 4;
+        userProfileEnrichmentScopeLabel.Text = "User profile enrichment scope";
         // 
         // GeneralSettingsForm
         // 
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(289, 181);
-        Controls.Add(userProfileEnrichmentTextBox);
-        Controls.Add(userProfileEnrichmentLabel);
+        ClientSize = new Size(289, 229);
+        Controls.Add(userProfileEnrichmentScopeTextBox);
+        Controls.Add(userProfileEnrichmentScopeLabel);
+        Controls.Add(userProfileEnrichmentEndpointTextBox);
+        Controls.Add(userProfileEnrichmentEndpointLabel);
         Controls.Add(enrichUserProfileCheckBox);
         Controls.Add(saveButton);
         FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -94,6 +114,8 @@ partial class GeneralSettingsForm
 
     private Button saveButton;
     private CheckBox enrichUserProfileCheckBox;
-    private Label userProfileEnrichmentLabel;
-    private TextBox userProfileEnrichmentTextBox;
+    private Label userProfileEnrichmentEndpointLabel;
+    private TextBox userProfileEnrichmentEndpointTextBox;
+    private TextBox userProfileEnrichmentScopeTextBox;
+    private Label userProfileEnrichmentScopeLabel;
 }
